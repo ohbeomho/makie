@@ -14,6 +14,6 @@ limits!(ax, -30, 30, -30, 30)
 
 rotation = range(-10, 10, length=120)
 
-record(fig, "line.mp4", rotation; framerate=30) do t
+record(fig, "vids/line.mp4", rotation; framerate=30) do t
   a[] = t
 end

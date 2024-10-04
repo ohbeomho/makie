@@ -10,7 +10,7 @@ timestamps = range(0, 10 * pi, step=1 / 7.5)
 fig, ax = lines(sin_points)
 lines!(ax, cos_points)
 
-record(fig, "wave.mp4", timestamps; framerate=30) do time
+record(fig, "vids/wave.mp4", timestamps; framerate=30) do time
   sin_y = sin(time) * time
   cos_y = cos(time) * time
   sin_points[] = push!(sin_points[], Point2f(time, sin_y))
