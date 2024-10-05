@@ -7,7 +7,7 @@ set_theme!(theme_black())
 d = 0.01
 sigma = 10
 beta = 8 / 3
-rho = 30
+rho = 28
 
 function next_pos(pos)
   x, y, z = pos
@@ -19,15 +19,20 @@ end
 
 time = Observable(0.0)
 ps = Observable(Point3f[])
+colors = Observable(Float64[])
 ps[] = push!(ps[], Point3f(1, 1, 1))
 
 f = Figure()
 ax = Axis3(f[1, 1], title="Lorenz Attractor")
-lines!(ax, ps)
+l = lines!(ax, ps, color=colors, transparency=true)
 limits!(ax, -30, 30, -30, 30, 0, 50)
 
-record(f, "vids/lorenz.mp4", 1:1200; framerate=100) do t
+record(f, "vids/lorenz.mp4", 1:240; framerate=30) do t
   time[] = t
-  ps[] = push!(ps[], next_pos(ps[][end]))
-  ax.azimuth = 1.275pi + sin(t * d) * 0.5
+  for i in 1:30
+    ps[] = push!(ps[], next_pos(ps[][end]))
+    colors[] = push!(colors[], t)
+  end
+  ax.azimuth = 1.275pi + sin(t * 0.05) * 0.5
+  l.colorrange = (0, t)
 end
