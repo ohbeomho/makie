@@ -8,7 +8,7 @@ tri1 = @lift([0 0; cos($a) sin($a); 0 0; cos($a) 0; cos($a) sin($a); cos($a) 0])
 tri2 = @lift([0 0; 1 tan($a); 0 0; 1 0; 1 tan($a); 1 0])
 
 fig = Figure()
-Axis(fig[1, 1], title="Trigonometric ratios")
+Axis(fig[1, 1], title="Trigonometric ratios", aspect=1)
 limits!(-0.5, 1.5, -0.5, 1.5)
 linesegments!(tri2, color=@lift([$a == pi / 2 ? :black : (:white, 0.5), :white, :dodgerblue2]))
 linesegments!(tri1, color=[:white, :red, :green])
